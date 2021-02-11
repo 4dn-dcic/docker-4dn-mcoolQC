@@ -19,7 +19,7 @@ inputs:
   outdir:
    type: string
    inputBinding:
-    position: 3
+    position: 2
    default: "."
 
 outputs:
