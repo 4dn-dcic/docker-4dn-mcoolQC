@@ -7,7 +7,7 @@ import json
 @click.argument('outdir')
 @click.argument('filename')
 def main(infile, outdir, filename):
-    output = {'failed_balancing': []}
+    output = {'Failed Balancing': []}
     with open(infile) as f:
         data = f.readlines()
     info = {}
@@ -26,7 +26,7 @@ def main(infile, outdir, filename):
 
     for k, v in info.items():
         if v['converged'] == 'false':
-            output['failed_balancing'].append(k)
+            output['Failed Balancing'].append(k)
 
     print(output)
     outpath = outdir + '/' + filename + '.json'
