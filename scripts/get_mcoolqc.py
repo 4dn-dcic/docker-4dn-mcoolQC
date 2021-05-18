@@ -11,14 +11,17 @@ import numpy as np
 def main(mcoolfile, outdir, filename):
     f = mcoolfile
     failed_balancing = []
+    resolutions_in_file = []
     report = {}
     log = {}
     # Get the list of resolutions
     resolutions = cooler.fileops.list_coolers(f)
+
     for res in resolutions:
         cooler_path = str(f) + '::' + res
         c = cooler.Cooler(cooler_path)
         binsize = c.info['bin-size']
+        resolutions_in_file.append(binsize)
         click.echo('working on: ' + str(binsize) + ' resolution')
         if 'weight' in c.bins():
             weights = c.bins()['weight']
@@ -38,6 +41,7 @@ def main(mcoolfile, outdir, filename):
         failed_balancing.append('None')
 
     report['Failed Balancing'] = failed_balancing
+    report['Resolutions in File'] = resolutions_in_file
     outpath = outdir + '/' + filename + '.json'
     with open(outpath, 'w') as outfile:
         json.dump(report, outfile, indent=2)
