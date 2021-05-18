@@ -12,6 +12,4 @@ then
 	mkdir $OUTDIR
 fi
 
-cooler attrs $INPUT > $OUTDIR/cooler_attrs.txt
-
-python3 /usr/local/bin/get_mcoolqc.py $OUTDIR/cooler_attrs.txt $OUTDIR $FILE_NAME
+python3 /usr/local/bin/get_mcoolqc.py $INPUT $OUTDIR $FILE_NAME

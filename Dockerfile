@@ -1,4 +1,5 @@
 FROM ubuntu:16.04
+
 RUN apt-get update -y && apt-get install -y \
     bc \
     bzip2 \
@@ -24,16 +25,18 @@ RUN apt-get update -y && apt-get install -y \
     vim \
     wget \
     zlib1g-dev \
-    libmysqlclient-dev
+    libmysqlclient-dev \
+    python3-pip
 
-RUN apt-get update -y && apt-get install -y \
-   python3.5-dev \
-   python3-setuptools \
-   && wget https://bootstrap.pypa.io/get-pip.py \
-   && python3.5 get-pip.py
+# Install Python 3.6
+RUN wget https://www.python.org/ftp/python/3.6.3/Python-3.6.3.tgz && tar -xvf Python-3.6.3.tgz
+WORKDIR Python-3.6.3
+RUN ./configure
+RUN make
+RUN make install
 
 # installing python libraries
-RUN pip install click==7.0
+RUN pip3 install click==7.0
 
 # download tools
 WORKDIR /usr/local/bin
