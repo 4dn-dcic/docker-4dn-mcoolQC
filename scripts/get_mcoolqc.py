@@ -21,7 +21,7 @@ def main(mcoolfile, outdir, filename):
         cooler_path = str(f) + '::' + res
         c = cooler.Cooler(cooler_path)
         binsize = c.info['bin-size']
-        resolutions_in_file.append(binsize)
+        resolutions_in_file.append(str(binsize))
         click.echo('working on: ' + str(binsize) + ' resolution')
         if 'weight' in c.bins():
             weights = c.bins()['weight']
